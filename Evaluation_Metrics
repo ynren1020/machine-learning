@@ -1,0 +1,40 @@
+# From Approaching (Almost) Any Machine Learning Problem
+
+If we talk about classification problems, the most common metrics used are:
+- Accuracy
+- Precision (P)
+- Recall (R)
+- F1 score (F1)
+- Area under the ROC (Receiver Operating Characteristic) curve or simply AUC (AUC)
+- Log loss
+- Precision at k (P@k)
+- Average precision at k (AP@k)
+- Mean average precision at k (MAP@k)
+
+When it comes to regression, the most commonly used evaluation metrics are:
+- Mean absolute error (MAE)
+- Mean squared error (MSE)
+- Root mean squared error (RMSE)
+- Root mean squared logarithmic error (RMSLE)
+- Mean percentage error (MPE)
+- Mean absolute percentage error (MAPE)
+- R^2
+
+Knowing about how the aformentioned metrics work is not the only thing we have to understand. We must also know when to use which metrics, and that depends on 
+what kind of data and targets you have. I think it's more about the targets and less about the data.
+
+When we have an equal number of positive and negative samples in a binary classification metric, we generally use accuracy, precision, recall and f1.
+
+when the dataset is skewed (imbalanced outcomes, e.g., 90% positive, 10% negative), it is not advisable to use accuracy as an evaluation metrics as it is not representative of the data.
+In these cases, it's better to look at other metrics such as precision.
+
+True positive (TP): Given an image, if your model predicts the image has disease, and the actual target for that image has disease, it is considered a true positive.
+True negative (TN): Given an image, if your model predicts the image does not have disease and the actual target says it does not have disease, it is considered a true negative.
+False positive (FP): Given an image, if your model predicts disease and the actual target for that image is non-disease, it is a false positive.
+False negative (FN): Given an image, if your model predicts non-disease and the actual target for that image is disease, it is a false negative.
+
+In simple words, if your model incorrectly (or falsely) predicts positive class, it is a false positive. If your model incorrectly (or falsely) predicts negative class, it is a false negative.
+
+
+
+
