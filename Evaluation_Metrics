@@ -35,6 +35,13 @@ False negative (FN): Given an image, if your model predicts non-disease and the 
 
 In simple words, if your model incorrectly (or falsely) predicts positive class, it is a false positive. If your model incorrectly (or falsely) predicts negative class, it is a false negative.
 
+Now, we can move to other important metrics. 
+First one is precision. Precision is defined as: Precision = TP/(TP + FP)
+
+Let's say we make a new model on the new skewed dataset and our model correctly identified 80 non-penumothorax out of 90 and 8 pneumothorax out of 10. Thus, we identify 88 images out of 100 successfully. 
+The accuracy is, therefore, 0.88 or 88%.
+
+
 
 
 
