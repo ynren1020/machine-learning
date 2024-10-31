@@ -1,3 +1,62 @@
 
-Norminal
-Ordinal
+Nominal variables are variables that have two or more categories which do not have any kind of order associated with them. For example, if gender is classified into two groups, i.e., male and female, it can be considered as a nominal variable.
+Ordinal variables, on the other hand, have "levels" or categories with a particular order associated with them. For example, an ordinal categorical variable can be a feature with three different levels: low, medium and high. Order is important.
+Binary, cyclic (days in a week)
+
+One of the best free datasets to understand categorical variables is cat-in-the-dat from Categorical Features Encoding Challenge from Kaggle. The dataset consists of all kinds of categorical variables:
+Nominal Ordinal Cyclical Binary
+Let's take a look at the target distribution, it is skewed and thus the best metric for this binary classification problem would be Area Under the ROC Curve (AUC). We can use precision and recall too, but AUC combines these two metrics. Thus, we will be 
+using AUC to evaluate the model that we build on this dataset.
+
+We have to know that computers do not understand text data and thus, we need to convert these categories to numbers. A simple way of doing this would be to create a dictionary that maps these values to numbers starting from 0 to N-1, where N is the total
+number of categories in a given feature. This type of encoding of categorical variables is known as Label Encoding, i.e., we care encoding every category as a numerical label.
+
+We can use this directly in many tree-based models:
+Decision trees
+Random forest
+Extra Trees
+Or any kind of boosted trees model
+- XGBoost
+- GBM
+- LightGBM
+
+This type of encoding cannot be used in linear models, support vector machines or neural networks as they expect data to be normalized (or standardized).
+For these types of models, we can binarize the data.
+Even though the sparse representation of binarized features takes much less memory than its dense representation, there is another transformation for categorical variables that takes even less memory.
+This is known as One Hot Encoding.
+One hot encoding is a binary encoding too in the sense that there are only two values, 0s and 1s. However, it must be noted that it's not a binary representation. When one-hot encoding, the vector size has to be same as the number of categories we are looking at. 
+
+Whenever you get categorical variables, follow these simple steps:
+- fill the NaN values (this is very important!)
+- convert them to integers by applying label encoding using LabelEncoder of scikit-learn or by using a mapping dictionary. If you didn't fill up NaN values with something, you might have to take care of them in this step.
+- create one-hot encoding. Yes, you can skip binarization!
+- go for modelling! 
+
+Please note that we do not need to normalize data when we use tree-based models. This is, however, a vital thing to do and cannot be missed when we are using linear models such as logistic regression.
+
+Entity embeddings are a powerful technique used in neural networks to transform categorical variables into dense vector representations. This approach is particularly useful when dealing with high-cardinality categorical data. Here’s a simple explanation:
+
+Entity Embeddings in Neural Networks:
+What They Are:
+
+Entity embeddings are learned representations of categorical variables. Instead of representing categories as one-hot vectors (which can be very sparse and high-dimensional), each category is represented by a dense, low-dimensional vector.
+How They Work:
+
+When a neural network is trained, it learns to map each category to a dense vector in a continuous vector space. These vectors (embeddings) capture the relationships and similarities between different categories.
+For example, if you have a categorical variable like "city," each city will be mapped to a unique vector. Cities that are similar in some way (e.g., geographically close) might have similar embeddings.
+Why Use Them:
+
+Efficiency: Embeddings reduce the dimensionality of categorical variables, making the model more efficient.
+Performance: They often improve the performance of the model by capturing underlying patterns and relationships in the data that one-hot encoding cannot.
+Generalization: Embeddings help the model generalize better to unseen data by learning meaningful representations.
+
+
+
+
+
+
+
+
+
+
+
