@@ -1,1 +1,10 @@
 Feature engineering is one of the most crucial parts of building a good machine learning model. If we have useful features, the model will perform better.
+If we have useful features, the model will perform better. There are many situations where you can avoid large, complicated models and use simple models with crucially engineered features.
+
+We must keep in mind that feature engineering is something that is done in the best possible manner only when you have some knowledge about the domain of the problem and depends a lot on the data in concern.
+However, there are some general techniques that you can try to create features from almost all kinds of numerical and categorical variables. Feature engineering is not just about creating new features from data but also 
+includes different types of normalization and transformations.
+
+
+
+
