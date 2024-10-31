@@ -106,6 +106,40 @@ An AUC of 1.0 means the model perfectly distinguishes between the two classes.
 An AUC of 0.85, like in your case, means the model has a good performance and is quite good at distinguishing between the two classes. 
 It means there's an 85% chance that the model will correctly distinguish between a randomly chosen positive instance and a randomly chosen negative instance.
 
+After calculating probabilities and AUC, you would want to make predictions on the test set. Depending on the problem and use-case, you might want to either have probabilities or actual classes. If you want to have 
+probabilities, it's effortless. You already have them. If you want to have classes, you need to select a threshold. In the case of binary classification, you can do something like the following.
+Prediction = Probability >= Threshold
+Which means, that prediction is a new list which contains only binary variables. An item in prediction is 1 if the probability is greater than or equal to a given threshold else the value is 0.
+
+You can use the ROC curve to choose this threshold. The ROC curve will tell you how the threshold impacts false positive rate and true positive rate and thus, in turn, false positives and true positives. You should choose
+the threshold that is best suited for your problem and datasets.
+For example, if you don't want to have too many false positives, you should have a high threshold value. This will, however, also give you a lot more false negatives. Observe the trade-off and select the best threshold.
+
+AUC is a widely used metric for skewed binary classification tasks in the industry, and a metric everyone should know about. Once you understand the idea behind AUC, as explained in the paragraphs above, it is also easy to explain
+it to non-technical people who would probably be assessing your models in the industry.
+
+Another important metric you should learn after learning AUC is log loss. In case of a binary classification problem, we define log loss as:
+Log Loss = -1.0*(target*log(prediction) + (1-target)*log(1-prediction))
+Where target is either 0 or 1 and prediction is a probability of a sample belonging to class 1.
+
+For multiple samples in the dataset, the log-loss over all samples is a mere average of all individual log loss. One thing to remember is that log loss penalizes quite high for an incorrect or a far-off prediction, i.e. log loss
+punishes you for being very sure and very wrong.
+
+There are some advanced metrics:
+One of them which is quite widely used is quadratic weighted Kappa, also known as QWK. It is also known as Cohen's kappa. QWK measures the "agreement" between two "ratings". The ratings can be any real numbers in 0 to N. And preditions
+are also in the same range. An agreement can be defined as how close these ratings are to each other. So, it's suitable for a classification problem with N different classes. If the agreement is high, the score is closer toward 1.0.
+In the case of low agreement, the score is close to 0.
+
+Another important metric is Matthew's Correlation Coefficient (MCC). MCC ranges from -1 to 1. 1 is perfect prediction, -1 is imperfect prediction, and 0 is random prediction. The formula for MCC is quite simple:
+MCC = (TP*TN-FP*FN)/[(TP+FP)*(FN+TN)*(FP+TN)*(TP+FN)]^(0.5)
+We see that MCC takes into consideration TP, FP, TN and FN and thus can be used for problems where classes are skewed.
+
+
+
+
+
+
+
 
 
 
