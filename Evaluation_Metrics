@@ -40,6 +40,74 @@ First one is precision. Precision is defined as: Precision = TP/(TP + FP)
 
 Let's say we make a new model on the new skewed dataset and our model correctly identified 80 non-penumothorax out of 90 and 8 pneumothorax out of 10. Thus, we identify 88 images out of 100 successfully. 
 The accuracy is, therefore, 0.88 or 88%.
+But, out of these 100 samples, 10 non-pneumothorax images are misclassified as having pneumothorax and 2 pneumothorax are misclassified as not having pneumothorax.
+Thus, we have:
+- TP: 8
+- TN: 80
+- FP: 10
+- FN: 2
+So, our precision is 8/(8+10) = 0.444. This means our model is correct 44.4% times when it's trying to identify positive samples (pneumothorax).
+Next, we come to recall. Recall is defined as: Recall = TP/(TP + FN)
+In the above case recall is 8/(8+2) = 0.80. This means our model identified 80% of positive samples correctly.
+
+For a "good" model, our precision and recall values should be high. We see that in the above example, the recall value is quite high. However, precision is very low!
+Our model produces quite a lot of false postives but less false negatives. Fewer false negatives are good in this type of problem because you don't want to say that patients 
+do not have pneumothorax when they do. That is going to be more harmful. But we do have a lot of false positives, and that's not good either.
+
+Most of the models predict a probability, and when we predict, we usually choose this threshold to be 0.5. This threshold is not always ideal, and depending on this threshold, your value of precision
+and recall can change drastically. If for every threshold we choose, we calculate the precision and recall values, we can create a plot between these sets of values. This plot or curve is known as the 
+precision-recall curve.
+
+You will notice that it's challenging to choose a value of threshold that gives both good precision and recall values. If the threshold is too high, you have a smaller number of true positives and a high number
+of false negatives. This decreases your recall; however, your precision score will be high. If you reduce the threshold too low, false positives will increase a lot, and precision will be less. 
+
+Both precision and recall range from 0 to 1 and a value closer to 1 is better.
+
+F1 score is a metric that combines both precision and recall. It is defined as a simple weighted average (harmonic mean) of precision and recall. If we denote precision using P and recall using R, we can represent
+the F1 score as: F1 = 2PR/(P + R)
+A little bit of mathematics will lead you to the following equation of F1 based on TP, FP and FN
+F1 = 2TP/(2TP + FP + FN)
+
+Instead of looking at precision and recall individually, you can also just look at F1 score. Same as for precision, recall and accuracy, F1 score also ranges from 0 to 1, and a perfect prediction model has an F1 of 1.
+When dealing with datasets that have skewed targets, we should look at F1 (or precision and recall) instead of accuracy.
+
+Then there are other crucial terms that we should know about.
+The first one is TPR or True Positive Rate, which is the same as recall: TPR = TP/(TP + FN)
+TPR or recall is also known as sensitivity.
+
+And FPR or False Positive Rate, which is defined as: FPR = FP/(TN + FP)
+
+And 1 - FPR is known as specificity or True Negative Rate or TNR.
+
+TPR vs FPR curve is also known as the Receiver Operating Characteristic (ROC). And if we calculate the area under this ROC curve, we are calculating another metric which is used very often when you have 
+a dataset which has skewed binary targets.
+This metric is known as the Area Under ROC Curve or Area Under Curve or just simply AUC.
+
+AUC values range from 0 to 1. 
+- AUC = 1 implies you have a perfect model. Most of the time, it means that you made some mistake with validation and should revisit data processing and validation pipeline of yours. If you didn't make any mistakes, 
+then congratulations, you have the best model one can have for the dataset you built it on.
+- AUC = 0 implies that your model is very bad (or very good!). Try inverting the probabilities for the predictions, for example, if your probability for the positive class is p, try substituting it with 1 - p. This kind
+of AUC may also mean that there is some problem with your validation or data processing.
+- AUC = 0.5 implies that your predictions are random. So, for any binary classification problem, if I predict all targets as 0.5, I will get an AUC of 0.5.
+
+AUC values between 0 and 0.5 imply that your model is worse than random. Most of the time, it's because you inverted the classes. If you try to invert your predictions, your AUC might become more than 0.5. AUC values closer
+to 1 are considered good.
+
+But what does AUC say about our model?
+Suppose you get an AUC of 0.85 when you build a model to detect pneumothorax from chest x-ray images. This means that if you select a random image from your dataset with pneumothorax (Positive sample) and another random image
+without pneumothorax (negative sample), then the pneumothorax image will rank higher than a non-pneumothorax image with a probability of 0.85. (it measures the ability of the model to distinguish between the two classes)
+
+AUC (Area Under the Curve):
+What it measures: AUC measures how well the model can distinguish between the two classes (e.g., patients with a disease vs. patients without a disease).
+How it works: Imagine you have a curve called the ROC (Receiver Operating Characteristic) curve. This curve plots the true positive rate (sensitivity) against the false positive rate (1-specificity) at various threshold settings.
+Interpretation:
+An AUC of 0.5 means the model is no better than random guessing.
+An AUC of 1.0 means the model perfectly distinguishes between the two classes.
+An AUC of 0.85, like in your case, means the model has a good performance and is quite good at distinguishing between the two classes. 
+It means there's an 85% chance that the model will correctly distinguish between a randomly chosen positive instance and a randomly chosen negative instance.
+
+
+
 
 
 
