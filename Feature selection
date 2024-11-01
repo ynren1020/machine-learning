@@ -1,1 +1,27 @@
 Having too many features pose a problem well known as the curse of dimensionality. If you have a lot of features, you must also have a lot of training samples to capture all the features.
+
+The simplest form of selecting features would be to remove features with very low variance. If the features have a very low variance (i.e., very close to 0), they are close to being constant and thus, do not add any value
+to any model at all.
+
+We can also remove features which have a high correlation. For calculating the correlation between different numerical features, you can use the Pearson correlation.
+
+And now we can move to some univariate ways of feature selection. Univariate feature selection is nothing but a scoring of each feature against a given target. 
+Mutual information, ANOVA F-test and Chisq are some of the most popular methods for univariate feature selection. 
+
+It must be noted that you can use Chisq only for data which is non-negative in nature. This is a particularly useful feature selection technique in natural language processing when we have a bag of words or tf-idf based 
+features. It's best to create a wrapper for univariate feature selection that you can use for almost any new problem.
+
+Univariate feature selection may not always perform well. Most of the time, people prefer doing feature selection using a machine learning model. Let's see how that is done.
+The simplest form of feature selection that uses a model for selection is known as greedy feature selection. In greedy feature selection, the first step is to choose a model. The second step is to select a loss/scoring function.
+And the third and final step is to iteratively evaluate each feature and add it to the list of "good" features if it improves loss/score. It can't get simpler than this. But you must keep in mind that this is known as greedy feature 
+selection for a reason. This feature selection process will fit a given model each time it evaluates a feature. The computational cost associated with this kind of method is very high. It will also take a lot of time for this kind 
+of feature selection to finish. And if you do not use this feature selection properly, then you might even end up overfitting the model.
+
+Another greedy approach is known as recursive feature elimination (RFE), start with all features and keep removing one feature in every iteration that provides the least value to a given model. But how to do we know which feature
+offers the least value? Well, if we use models like linear support vector machine (SVM) or logistic regression, we get a coefficient for each feature which decides the importance of the features. In case of any tree-based models,
+we get feature importance in place of coefficients. In each iteration, we can eliminate the least important feature and keep eliminating it until we reach the number of features needed.
+
+When we are doing recursive feature elimination, in each iteration, we remove the feature which has the feature importance or the feature which has a coefficient close to 0. Please remember that when you use a model like logistic 
+regression for binary classification, the coefficients for features are more positive if they are important for the positive class and more negative if they are important for the negative class. 
+
+L1 (Lasso) penalization, have L1 penalization for regularization, most coefficients will be 0 (or close to 0), and we select the features with non-zero coefficients.
